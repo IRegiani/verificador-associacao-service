@@ -1,0 +1,43 @@
+{
+  "name": "verificador-associacao-service",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test:unit",
+    "lint": "eslint --config .eslintrc.js --ext .js ./src",
+    "local": "cross-env node index.js",
+    "local:watch": "cross-env nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/IRegiani/verificador-associacao-service.git"
+  },
+  "author": "Iago R. Regiani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IRegiani/verificador-associacao-service/issues"
+  },
+  "homepage": "https://github.com/IRegiani/verificador-associacao-service#readme",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "compression": "^1.7.4",
+    "config": "3.3.2",
+    "cors": "^2.8.5",
+    "cross-env": "7.0.2",
+    "express": "4.17.1",
+    "express-http-context": "^1.2.4",
+    "helmet": "^4.1.1",
+    "swagger-ui-express": "^4.1.4"
+  },
+  "devDependencies": {
+    "eslint": "7.12.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-async-await": "0.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "jest": "26.6.1",
+    "nodemon": "^2.0.6",
+    "swagger-parser": "^10.0.2"
+  }
+}

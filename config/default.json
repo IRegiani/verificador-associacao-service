@@ -1,0 +1,12 @@
+{
+  "database": {
+    "logger": false 
+  },
+  "cors": {
+    "origin": "*",
+    "optionsSuccessStatus": 200
+  },
+  "server": {
+    "port": 4000
+  }
+}

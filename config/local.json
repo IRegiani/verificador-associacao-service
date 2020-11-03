@@ -1,0 +1,8 @@
+{
+  "database": {
+    "url": "localhost",
+    "logger": true,
+    "username": "",
+    "password": ""
+  }
+}
