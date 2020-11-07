@@ -1,13 +1,10 @@
 const config = require('config');
 const gitCommit = require('child_process').execSync('git rev-parse HEAD').toString().trim();
 
-const logger = require('./src/utils/logger').initLogger('');
+const logger = require('./src/utils/logger').initLogger({ name: 'MAIN' });
 
 const environment = process.env.NODE_ENV || 'local';
 const Service = require('./src/app');
-
-// WIP: check necessary env vars
-// !process.env.[key] throw new Error('Missing env var')
 
 const init = async () => {
   try {
@@ -19,10 +16,10 @@ const init = async () => {
 
     service.listen(port, (error) => {
       if (error) throw error;
-      logger.info('Service started');
+      logger.success('Service started');
     });
   } catch (error) {
-    logger.error(`Error initializing Service: ${error.message}`);
+    logger.error(`Error initializing Service: ${error.message}`, error);
     process.exit(1);
   }
 };

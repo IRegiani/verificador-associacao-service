@@ -4,5 +4,8 @@
     "logger": true,
     "username": "",
     "password": ""
+  },
+  "logger": {
+    "verbose": true
   }
 }

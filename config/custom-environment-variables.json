@@ -3,5 +3,8 @@
     "url": "",
     "username": "",
     "password": ""
+  },
+  "logger": {
+    "url": "REMOTE_LOGGER_URL"
   }
 }

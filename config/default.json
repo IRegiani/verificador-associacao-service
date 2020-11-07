@@ -8,5 +8,8 @@
   },
   "server": {
     "port": 4000
+  },
+  "logger": {
+    "verbose": true
   }
 }
