@@ -1,5 +1,6 @@
 # verificador-associacao-service
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/376c5ebad7814492b308fef77cd7b423)](https://app.codacy.com/gh/IRegiani/verificador-associacao-service?utm_source=github.com&utm_medium=referral&utm_content=IRegiani/verificador-associacao-service&utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0ac196c6c17c45a5aa3d552b3494031c)](WIP)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/IRegiani/verificador-associacao-service)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/IRegiani/verificador-associacao-service)
