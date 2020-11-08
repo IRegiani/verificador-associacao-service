@@ -1,6 +1,6 @@
 {
   "database": {
-    "logger": false 
+    "projectId": "verificador-associacao"
   },
   "cors": {
     "origin": "*",

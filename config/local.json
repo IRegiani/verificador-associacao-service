@@ -1,9 +1,7 @@
 {
   "database": {
-    "url": "localhost",
-    "logger": true,
-    "username": "",
-    "password": ""
+    "host": "localhost:5000",
+    "ssl": false
   },
   "logger": {
     "verbose": true

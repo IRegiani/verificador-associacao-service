@@ -12,10 +12,14 @@ const remoteLoggerConfig = {
 };
 
 const levels = ['info', 'error', 'success', 'warn', 'debug', 'complete'];
+const options = { types: { debug: { color: 'magenta', label: 'debug', logLevel: 'debug' } } };
+
 const errorHasStack = (error) => error instanceof Error && error.stack;
 const envirommentIsProd = process.env.NODE_ENV === 'production';
 
 let remoteLogger = {};
+const formatter = new Signale(options);
+formatter.config({ displayTimestamp: true, uppercaseLabel: true });
 
 if (envirommentIsProd) {
   remoteLogger = new SumoLogger(remoteLoggerConfig);
@@ -29,18 +33,18 @@ const createLogPrefixAndSuffix = (metadata, shouldShowMetada) => {
     if (!shouldShowMetada) return '';
     if (errorHasStack(metadata)) return `\n${metadata.stack}`;
     if (typeof metadata !== 'object') return metadata;
-    if (typeof metadata === 'object') return Object.entries(metadata).reduce((acc, [key, value]) => acc.concat(`${key}=${errorHasStack(value) ? value.stack : value} `), '');
+    if (typeof metadata === 'object') return Object.entries(metadata).reduce((acc, [key, value]) => acc.concat(errorHasStack(value) ? `\n${value.stack}` : `${key}=${value} `), '');
     return '';
   };
 
   return { prefix: { reqId, username }, suffix: getSuffixFormat() };
 };
 
-const handleLog = (formatter, level, shouldShowMetada) => (message, metadata) => {
+const handleLog = (level, shouldShowMetada, name) => (message, metadata) => {
   const { prefix: { username, reqId }, suffix } = createLogPrefixAndSuffix(metadata, shouldShowMetada);
   const prefixToLog = `[${reqId ? ` reqId: ${reqId} - ${username} ` : ''}]`;
 
-  formatter[level]({ message, prefix: prefixToLog, suffix });
+  formatter.scope(name)[level]({ message, prefix: prefixToLog, suffix });
 
   if (level !== 'debug' && envirommentIsProd) {
     let metadataToLog;
@@ -49,21 +53,14 @@ const handleLog = (formatter, level, shouldShowMetada) => (message, metadata) =>
     else if (typeof metadata === 'object') objectMetadata = metadata;
     else metadataToLog = metadata;
 
-    remoteLogger.log({ level, message, reqId, username, metadata: metadataToLog, ...objectMetadata });
+    remoteLogger.log({ level, message, reqId, src_user: username, metadata: metadataToLog, ...objectMetadata });
   }
 };
 
 const initLogger = ({ name, verbose }) => {
   const shouldShowMetada = typeof verbose === 'undefined' ? config.get('logger.verbose') : verbose;
-  const options = {
-    scope: name,
-    types: { debug: { color: 'magenta', label: 'debug', logLevel: 'debug' } },
-  };
 
-  const formatter = new Signale(options);
-  formatter.config({ displayTimestamp: true, uppercaseLabel: true });
-
-  const logger = levels.reduce((finalLogger, level) => ({ ...finalLogger, [level]: handleLog(formatter, level, shouldShowMetada) }), {});
+  const logger = levels.reduce((finalLogger, level) => ({ ...finalLogger, [level]: handleLog(level, shouldShowMetada, name) }), {});
 
   return logger;
 };

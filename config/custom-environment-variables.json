@@ -1,8 +1,6 @@
 {
   "database": {
-    "url": "",
-    "username": "",
-    "password": ""
+    "keyFilename": "DATABASE_KEYS_PATH"
   },
   "logger": {
     "url": "REMOTE_LOGGER_URL"

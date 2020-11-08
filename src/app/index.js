@@ -6,8 +6,9 @@ const config = require('config');
 const cors = require('cors');
 const swagger = require('swagger-ui-express');
 const { StatusCodes } = require('http-status-codes');
+const Firestore = require('@google-cloud/firestore');
 
-// WIP firestore stuff
+// WIP check firestore client
 // WIP Check basePath and https
 
 // Router
@@ -46,15 +47,25 @@ class Service {
 
     // eslint-disable-next-line no-unused-vars
     const errorHandler = (err, req, res, next) => {
-      this.logger.error('Unhandled error in', { method: req.method, path: req.path, err });
+      this.logger.error(`Unhandled error in ${req.path}`, { method: req.method, path: req.path, err });
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: err.message });
     };
 
     this._app.use(errorHandler);
+    await this.startDB();
   }
 
   async listen(...params) {
     this._app.listen(...params);
+  }
+
+  async startDB() {
+    const databaseConfig = config.get('database');
+    this._db = new Firestore(databaseConfig);
+    const document = this._db.doc('path/dummy-doc');
+    await document.get();
+
+    this.logger.info('Database connected successfully');
   }
 }
 
