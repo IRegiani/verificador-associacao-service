@@ -24,7 +24,7 @@ jobs:
 workflows:
   build-deploy:
     jobs:
-      - node/test
+      - node/test:
           filters:
               branches:
                 only: main
@@ -33,7 +33,8 @@ workflows:
               - node/test
       - notify:
           requires:
-              - build
-      - codecov:
+              - deploy
+      - codecov/upload:
+          file: ''
           requires:
               - node/test
