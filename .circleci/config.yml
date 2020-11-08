@@ -2,7 +2,6 @@ version: 2.1
 orbs:
   node: circleci/node@3.0.0
   discord: teka23/discord@0.0.1
-  codecov: codecov/codecov@1.1.1
   queue: eddiewebb/queue@1.5.0
 
 jobs:
@@ -34,7 +33,3 @@ workflows:
       - notify:
           requires:
               - deploy
-      - codecov/upload:
-          file: ''
-          requires:
-              - node/test
