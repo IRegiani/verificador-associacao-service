@@ -4,7 +4,7 @@ orbs:
   discord: teka23/discord@0.0.1
   codecov: codecov/codecov@1.1.1
 
-  jobs:
+jobs:
   notify:
     docker:
       - image: 'cimg/base:stable'
