@@ -3,6 +3,7 @@ orbs:
   node: circleci/node@3.0.0
   discord: teka23/discord@0.0.1
   codecov: codecov/codecov@1.1.1
+  queue: eddiewebb/queue@1.5.0
 
 jobs:
   notify:
@@ -10,9 +11,29 @@ jobs:
       - image: 'cimg/base:stable'
     steps:
       - discord/status
-
+  
+  deploy:
+    docker:
+      - image: 'google/cloud-sdk'
+    steps:
+      - run: |
+          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+  
 workflows:
   build-deploy:
     jobs:
       - node/test
-      - notify
+          filters:
+              branches:
+                only: main
+      - deploy:
+          requires:
+              - node/test
+      - notify:
+          requires:
+              - build
+      - codecov:
+          requires:
+              - node/test
