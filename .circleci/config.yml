@@ -9,8 +9,7 @@ jobs:
     docker:
       - image: 'cimg/base:stable'
     steps:
-      - discord/status:
-          message: PR ${CIRCLE_PULL_REQUESTS} deployed
+      - discord/status
   
   deploy:
     docker:
