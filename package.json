@@ -2,12 +2,12 @@
   "name": "verificador-associacao-service",
   "version": "1.0.0",
   "private": true,
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "npm run test:unit",
     "test:unit": "echo Pending implementation",
     "lint": "eslint --config .eslintrc.js --ext .js ./src",
-    "local": "cross-env node index.js",
+    "local": "cross-env NODE_ENV=local-dev node server.js",
     "db:local": "firebase emulators:start --import=./local-firestore --export-on-exit --project=verificador-associacao",
     "db:local:create": "firebase setup:emulators:firestore",
     "local:watch": "cross-env nodemon index.js"

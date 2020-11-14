@@ -1,8 +1,8 @@
 {
-  "database": {
-    "keyFilename": "DATABASE_KEYS_PATH"
-  },
   "logger": {
     "url": "REMOTE_LOGGER_URL"
+  },
+  "server": {
+    "port": "PORT"
   }
 }

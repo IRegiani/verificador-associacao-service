@@ -1,9 +1,13 @@
 {
   "database": {
+    "projectId": "verificador-associacao",
     "host": "localhost:5000",
     "ssl": false
   },
   "logger": {
     "verbose": true
+  },
+  "server": {
+    "port": 4000
   }
 }

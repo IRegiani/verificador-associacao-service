@@ -9,7 +9,8 @@ jobs:
     docker:
       - image: 'cimg/base:stable'
     steps:
-      - discord/status
+      - discord/status:
+          message: PR ${CIRCLE_PULL_REQUESTS} deployed
   
   deploy:
     docker:
@@ -17,8 +18,8 @@ jobs:
     steps:
       - run: |
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+          gcloud config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+          gcloud app deploy
   
 workflows:
   build-deploy:

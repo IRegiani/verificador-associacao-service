@@ -34,6 +34,7 @@ class Service {
     this._app.use(express.json());
     this._app.use(cors(config.get('cors')));
     this._app.use(requestContext.middleware);
+    this._app.set('trust proxy', true);
 
     this._app.use(RequestInterceptor());
 
@@ -60,7 +61,7 @@ class Service {
   }
 
   async startDB() {
-    const databaseConfig = config.get('database');
+    const databaseConfig = config.has('database') ? config.get('database') : undefined;
     this._db = new Firestore(databaseConfig);
     const document = this._db.doc('path/dummy-doc');
     await document.get();

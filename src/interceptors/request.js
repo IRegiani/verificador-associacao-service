@@ -10,6 +10,7 @@ module.exports = () => {
     requestContext.set('reqId', reqId);
     requestContext.set('username', username);
     requestContext.set('initTime', new Date().getMilliseconds());
+    requestContext.set('forwardList', request.get('X-Forwarded-For'));
   };
 
   const afterFinished = (request, response) => {
@@ -23,7 +24,9 @@ module.exports = () => {
     if (status >= 500 && status < 600) loggerLevel = 'error';
     if (status >= 400 && status < 500) loggerLevel = 'warn';
 
-    logger[loggerLevel]('Request completed', { status, method, url, userAgent, ip, time });
+    const forwardList = requestContext.get('forwardList');
+
+    logger[loggerLevel]('Request completed', { status, method, url, userAgent, ip, time, forwardList });
   };
 
   const RequestInterceptor = (request, response, next) => {
