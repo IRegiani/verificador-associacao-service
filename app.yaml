@@ -1,4 +1,0 @@
-runtime: nodejs12
-
-env_variables:
-  REMOTE_LOGGER_URL: ${REMOTE_LOGGER_URL}

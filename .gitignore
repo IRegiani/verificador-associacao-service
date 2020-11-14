@@ -9,3 +9,4 @@ firestore-debug*
 firebase-debug*
 ui-debug*
 /local-firestore
+app.yaml
