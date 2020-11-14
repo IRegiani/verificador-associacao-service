@@ -36,6 +36,10 @@ class Service {
     this._app.use(requestContext.middleware);
     this._app.set('trust proxy', true);
 
+    // add db instance as middleware
+    const databaseInstance = await this.startDB();
+    this._app.use((request, response, next) => { response.locals.db = databaseInstance; next(); });
+
     this._app.use(RequestInterceptor());
 
     // Routers
@@ -53,7 +57,6 @@ class Service {
     };
 
     this._app.use(errorHandler);
-    await this.startDB();
   }
 
   async listen(...params) {
@@ -67,6 +70,7 @@ class Service {
     await document.get();
 
     this.logger.info('Database connected successfully');
+    return this._db;
   }
 }
 
