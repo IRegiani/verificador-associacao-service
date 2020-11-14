@@ -61,11 +61,11 @@ const initLogger = ({ name, verbose }) => {
   const shouldShowMetada = typeof verbose === 'undefined' ? config.get('logger.verbose') : verbose;
 
   const logger = levels.reduce((finalLogger, level) => ({ ...finalLogger, [level]: handleLog(level, shouldShowMetada, name) }), {});
+  logger.flush = envirommentIsProd ? async () => remoteLogger.sendLogs() : () => {};
 
   return logger;
 };
 
 module.exports = {
   initLogger,
-  flushLogs: remoteLogger.flushLogs,
 };
