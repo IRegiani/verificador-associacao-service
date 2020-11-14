@@ -15,8 +15,8 @@ jobs:
           gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           gcloud --quiet app deploy
       - discord/status:
-        failure_message: "Triggered by: **${CIRCLE_USERNAME}** \\n\\n Ooops! The ${CIRCLE_PULL_REQUESTS} deploy has failed!"
-        success_message: "Triggered by: **${CIRCLE_USERNAME}** \\n\\n Wow! The ${CIRCLE_PULL_REQUESTS} deploy has succeed!"
+          failure_message: "Triggered by: **${CIRCLE_USERNAME}** \\n\\n Ooops! The ${CIRCLE_PULL_REQUESTS} deploy has failed!"
+          success_message: "Triggered by: **${CIRCLE_USERNAME}** \\n\\n Wow! The ${CIRCLE_PULL_REQUESTS} deploy has succeed!"
 
   
 workflows:
