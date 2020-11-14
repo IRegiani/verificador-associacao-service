@@ -10,7 +10,7 @@
     "local": "cross-env NODE_ENV=local-dev node server.js",
     "db:local": "firebase emulators:start --import=./local-firestore --export-on-exit --project=verificador-associacao",
     "db:local:create": "firebase setup:emulators:firestore",
-    "local:watch": "cross-env nodemon index.js"
+    "local:watch": "cross-env NODE_ENV=local-dev nodemon index.js"
   },
   "repository": {
     "type": "git",
