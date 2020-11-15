@@ -19,7 +19,7 @@
 
  1. After agreeing with the others collaborators which task you are going to do, goto the **main** branch
  2. Create a new branch and do your work there
- 3. Upon finishing don't forget Unit Tests and Integration Tests. To test, run `npm run test`. If it fails, you must fix them in order to proceed
+ 3. Upon finishing don't forget Unit Tests and Integration Tests. To test, run `npm run review`. If it fails, you must fix them in order to proceed
  4. If everything is ok, open a new Pull Request to **development**. Your PR is going to be blocked if the previous step is failing
 
 #### Client available [here](https://github.com/IRegiani/verificador-associacao)
