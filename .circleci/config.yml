@@ -23,8 +23,7 @@ workflows:
   build-deploy:
     jobs:
       - node/test:
-        run-command:
-          test:unit
+        run-command: test:unit
         filters:
             branches:
               only: main         
