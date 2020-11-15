@@ -1,15 +1,14 @@
 version: 2.1
 orbs:
-  node: circleci/node@3.0.0
+  node: circleci/node@4.1.0
   discord: antonioned/discord@0.1.0
-  queue: eddiewebb/queue@1.5.0
 
 jobs:
   deploy:
     docker:
       - image: 'google/cloud-sdk'
     steps:
-      - run: ls
+      - run: git clone $CIRCLE_REPOSITORY_URL
       - run: echo 'runtime:' $'nodejs12\nenv_variables:\n REMOTE_LOGGER_URL:'' '${REMOTE_LOGGER_URL} >app.yaml
       - run: |
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
@@ -24,9 +23,11 @@ workflows:
   build-deploy:
     jobs:
       - node/test:
-          filters:
-              branches:
-                only: main         
+        run-command:
+          test:unit
+        filters:
+            branches:
+              only: main         
       - deploy:
           requires:
               - node/test

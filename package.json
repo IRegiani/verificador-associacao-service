@@ -4,8 +4,10 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "test": "npm run test:unit",
-    "test:unit": "echo Pending implementation",
+    "test": "npm run test:unit && npm run test:integration",
+    "pretest:unit": "npm run lint",
+    "test:unit": "echo Pending UT implementation",
+    "test:integration": "echo Pending IT implementation",
     "lint": "eslint --config .eslintrc.js --ext .js ./src",
     "local": "cross-env NODE_ENV=local-dev node server.js",
     "db:local": "firebase emulators:start --import=./local-firestore --export-on-exit --project=verificador-associacao",
