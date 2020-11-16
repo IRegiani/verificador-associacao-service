@@ -11,7 +11,7 @@
 
 ### Running locally for the first time
 
- 1. After cloning, run `npm ci`
+ 1. After cloning, run `npm ci`, and `npm run db:local:create`,and make sure that Java is installed
  2. Run `npm run db:local`, to start the database and its UI runs at [http://localhost:5001](http://localhost:5001)
  3. Run `npm run local`, to start the service at [http://localhost:4000](http://localhost:4000)
 
