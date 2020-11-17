@@ -10,3 +10,4 @@ firebase-debug*
 ui-debug*
 /local-firestore
 app.yaml
+credentials.json

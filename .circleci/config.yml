@@ -9,7 +9,8 @@ jobs:
       - image: 'google/cloud-sdk'
     steps:
       - checkout
-      - run: echo 'runtime:' $'nodejs12\nenv_variables:\n REMOTE_LOGGER_URL:'' '${REMOTE_LOGGER_URL} $'\n GOOGLE_APPLICATION_CREDENTIALS:'$'\n'${GOOGLE_APPLICATION_CREDENTIALS}>app.yaml
+      - run: echo ${GOOGLE_APPLICATION_CREDENTIALS} > credentials.json
+      - run: echo 'runtime:' $'nodejs12\nenv_variables:\n REMOTE_LOGGER_URL:'' '${REMOTE_LOGGER_URL} $'\n GOOGLE_APPLICATION_CREDENTIALS:'' ./credentials.json'>app.yaml
       - run: |
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
           gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
